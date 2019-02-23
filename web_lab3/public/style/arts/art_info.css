@@ -1,0 +1,18 @@
+img {
+  size: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#art_description {
+  height: 100px;
+}
+input[type="text"],
+input[type="number"],
+#art_description {
+  font-size: 14px;
+}
+#is_participate {
+  float: right;
+}
+/*# sourceMappingURL=art_info.css.map */

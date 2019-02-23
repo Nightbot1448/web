@@ -1,0 +1,96 @@
+<div class="w3-modal disp-bl" *ngIf="ModalVis">
+  <div class="w3-modal-content width600">
+    <header class="w3-container w3-cyan">
+      <span class="w3-button w3-display-topright" (click)="closeaddform()">&#x2716;</span>
+      <h2 class="w3-center">Добавление акции</h2>
+    </header>
+    <div class="w3-container">
+      <div class="w3-section">
+        <label bold for="name">Название</label>
+        <input class="w3-input w3-border w3-margin-bottom" [(ngModel)]="name" id="name">
+        <label bold for="availCount">Количество</label>
+        <input class="w3-input w3-border w3-margin-bottom" [(ngModel)]="availCount" type="number" min="0" id="availCount">
+        <label bold for="minPrice">Начальная цена</label>
+        <input class="w3-input w3-border w3-margin-bottom" [(ngModel)]="minPrice" type="number" min="0" id="minPrice">
+        <label bold for="maxPrice">Максимальный шаг</label>
+        <input class="w3-input w3-border w3-margin-bottom" [(ngModel)]="maxPrice" type="number" min="0" id="maxPrice">
+        <label bold for="distr">Закон распределения</label>
+        <select class="w3-input w3-border w3-margin-bottom" [(ngModel)]="distr" id="distr">
+          <option value="равномерный">Равномерный</option>
+          <option value="биномиальный">Биномиальный</option>
+          <option value="нормальный">Нормальный</option>
+        </select>
+        <button class="w3-button w3-block w3-section w3-padding w3-cyan" (click)="add(name,availCount,minPrice,maxPrice,distr)">Добавить</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!ModalVis" class="w3-display-topmiddle mt w3-container" style="width: 60%;">
+  <div class="w3-row">
+    <div class="w3-col s12">
+      <button class="w3-block w3-xlarge w3-button w3-round-xxlarge w3-cyan" (click)="addform()">Добавить акции</button>
+    </div>
+  </div>
+  <div class="w3-row w3-margin-top">
+    <div class="w3-container">
+      <div class="w3-row w3-margin-bottom w3-teal header-row-height">
+        <div class="w3-col s1 w3-center w3-rightbar col-height mtpx w3-border-cyan">
+          <div class="text-height">
+            Индекс
+          </div>
+        </div>
+        <div class="w3-col s2 w3-center w3-rightbar col-height mtpx w3-border-cyan">
+          <div class="text-height">
+            Название
+          </div>
+        </div>
+        <div class="w3-col s2 w3-center w3-rightbar col-height mtpx w3-border-cyan">
+          <div class="text-height">
+            Количество
+          </div>
+        </div>
+        <div class="w3-col s2 w3-center w3-rightbar col-height mtpx w3-border-cyan">
+          <div class="text-height">
+            Начальная цена
+          </div>
+        </div>
+        <div class="w3-col s2 w3-center w3-rightbar col-height mtpx w3-border-cyan">
+          Максимальный шаг
+        </div>
+        <div class="w3-col s2 w3-center w3-rightbar col-height mtpx w3-border-cyan">
+          Закон распределения
+        </div>
+        <div class="w3-col s1 w3-center col-height mtpx">
+          <div class="text-height">
+            Удалить
+          </div>
+        </div>
+      </div>
+      <div class="w3-row w3-margin-bottom row-height w3-hover-blue" *ngFor="let todo of mydata ; index as ind">
+        <div class="w3-col s1 w3-center mtpx">
+          {{ind+1}}
+        </div>
+        <div class="w3-col s2 w3-center mtpx" >
+          {{todo.name}}
+        </div>
+        <div class="w3-col s2 w3-center mtpx" >
+          {{todo.availCount}}
+        </div>
+        <div class="w3-col s2 w3-center mtpx" >
+          {{todo.minPrice}}
+        </div>
+        <div class="w3-col s2 w3-center mtpx" >
+          {{todo.maxPrice}}
+        </div>
+        <div class="w3-col s2 w3-center mtpx" >
+          {{todo.distr}}
+        </div>
+        <div class="w3-col s1 w3-center mt_radio" >
+          <button (click)="deleteStock(ind)" class="w3-button">
+            &#x2716;
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

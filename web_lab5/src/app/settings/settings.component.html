@@ -1,0 +1,52 @@
+<div class="w3-display-topmiddle mt w3-container width800">
+  <div class="w3-row">
+    <div class="w3-col s12">
+      <button class="w3-block w3-cyan w3-large w3-button w3-round-xxlarge w3-border" (click)="saveSetts()">
+        Сохранить изменения
+      </button>
+    </div>
+  </div>
+  <div class="w3-row w3-margin-top">
+    <div class="w3-col s12 w3-center w3-teal">
+      Настройки биржы
+    </div>
+  </div>
+  <div class="w3-row row-height">
+    <div class="w3-col s4 w3-center mtpx" bold>
+      <label for="start_date">
+        Время начала
+      </label>
+    </div>
+    <div class="w3-col s4 mt_inp">
+      <input type="range" class="slider w3-cyan" [(ngModel)]="start" value="12" min="0" max="24"
+             id="start_date" (change)="updateStart(start)">
+    </div>
+    <div class="w3-col s4 w3-center mtpx">
+      {{mydata.startT}}
+    </div>
+  </div>
+  <div class="w3-row row-height">
+    <div class="w3-col s4 w3-center mtpx" bold>
+      Время окончания
+    </div>
+    <div class="w3-col s4 mt_inp">
+        <input type="range"  class="w3-cyan slider" [(ngModel)]="end" value="12" min="0" max="24"
+               (change)="updateEnd(end)">
+    </div>
+    <div class="w3-col s4 w3-center mtpx">
+      {{mydata.endT}}
+    </div>
+  </div>
+  <div class="w3-row row-height">
+    <div class="w3-col s4 w3-center mtpx" bold>
+      Время ожидания
+    </div>
+    <div class="w3-col s4 mt_inp">
+        <input type="range" class="w3-cyan slider" [(ngModel)]="waiting" value="0" min="0" max="60"
+               (change)="updateWait(waiting)">
+    </div>
+    <div class="w3-col s4 w3-center mtpx">
+      {{mydata.waitT}} мин
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+#playing_time{
+  font: 40px "GOST Type AU", sans-serif;
+}
+
+#playing_score{
+  font: 30px "GOST Type AU";
+  font-weight: 900;
+}
+
+#gameCanvas
+{
+  border-style: solid;
+}
+
+.records_header{
+  font: 50px "GOST Type AU";
+  font-weight: 900;
+}
+
+.manage-font{
+  font: 30px "GOST Type AU";
+  font-weight: 900;
+}
+
+.mt-10{
+  margin-top: 50px;
+}
+
+.mt-center{
+  margin-top: 16%;
+}

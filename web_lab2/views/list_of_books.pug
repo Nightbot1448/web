@@ -1,0 +1,172 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title Список групп
+		include head.pug
+		link(rel="stylesheet", href="/public/style/list_of_books.css")
+	body
+		.modal.fade#add_modal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+			.modal-dialog(role="document")
+				.modal-content
+					.modal-header
+						h5.modal-title Добавление книги
+						button.close.mt1(type="button", data-dismiss="modal", aria-label="Close")
+							span(aria-hidden="true") &times;
+					.modal-body
+						.form-group
+							.form-head
+								label Автор:&nbsp;
+								input.form-control#book_author(type="text")
+							.form-head
+								label Название книги:&nbsp;
+								input.form-control#book_title(type="text")
+							.form-inline.mt1
+								label Дата выпуска:&nbsp;
+								input.form-control#book_published(type="date")
+							button.btn.btn-success.mt3#add_submit(type="button") Добавить
+					.modal-footer
+						button.btn.btn-secondary(type="button", data-dismiss="modal") Закрыть
+		.container
+			.row.mt1
+				.col-sm-2
+					a(href='/')
+						button.btn.btn-info На главную
+				.col-2.offset-sm-8
+					button.btn.btn-success(type="button" data-toggle="modal" data-target="#add_modal") Добавить книгу
+			.row.mt1
+				.col-sm-1.offset-sm-7
+					button.btn.btn-outline-primary#filter_in_library Наличие
+				.col-sm-2
+					button.btn.btn-outline-primary#filter_return_date По дате возврата
+				.col-sm-2
+					button.btn.btn-outline-secondary#filter_clear Очистить фильтры
+			.row
+				.col-sm-12
+					table.table.table-bordered.table-hover#main_table
+						thead
+							tr
+								th#head_author Автор
+								th#head_title Название
+								th#head_published Дата выпуска
+								th#head_in_library В наличии
+								th#head_return Дата возврата
+								th#book_link Карточка книги
+						tbody#tbodyid
+							for book in books
+								tr
+									td
+										-let v = book.author
+										=v
+									td
+										-v = book.title
+										=v
+									td
+										-v = book.published
+										span=v
+									td
+										-v = book.in_library
+										if v
+											span &#x2714;
+										else
+											span &#x2716;
+									td
+										if book.return_date
+											span #{book.return_date}
+									td.link_btn
+										-l = '/books/'+book.id.toString()
+										a(href=l)
+											button.btn.btn-outline-info Открыть
+		script.
+			function addRow(tbody, book){
+				let b_l = '/books/' + book['id']
+				tbody.append($('<tr>')
+					.append($('<td>').text(book['author']))
+					.append($('<td>').text(book['title']))
+					.append($('<td>').text(book['published']))
+					.append($('<td>').text(book['in_library'] ? '\u2714' : '\u2716'))
+					.append($('<td>').text(book['return_date']))
+					.append($('<td>')
+						.append($('<a href=' + b_l + '>')
+							.append($('<button>')
+								.attr('class', 'btn btn-outline-info')
+								.text('Открыть')
+							)
+						)
+					)
+				);
+			}
+			function fillTable(tbody, books_list){
+				tbody.empty();
+				for (let i in books_list) {
+						addRow(tbody, books_list[i])
+				}
+			}
+			$("#filter_in_library").click(function () {
+				console.log('in library')
+				$.ajax({
+					type: "GET",
+					url: '/books',
+					data: {
+						in_library: true
+					},
+					dataType: "json"
+				})
+					.done(function (data) {
+						if (data['message'] === 'success')
+						{
+							fillTable($("#tbodyid"), data['books'])
+						}
+					});
+			})
+			$("#filter_return_date").click(function () {
+				$.ajax({
+					type: "GET",
+					url: '/books',
+					data: {
+						in_library: true,
+						return_date: true
+					},
+					dataType: "json"
+				})
+					.done(function (data) {
+						if (data['message'] === 'success') {
+							fillTable($("#tbodyid"), data['books'])
+						}
+					});
+			});
+			$("#filter_clear").click(function () {
+				$.ajax({
+					type: "GET",
+					url: '/books',
+					data: {
+						clear: true
+					},
+					dataType: "json"
+				})
+					.done(function (data) {
+						if (data['message'] === 'success') {
+							fillTable($("#tbodyid"), data['books'])
+						}
+					});
+			})
+			$("#add_submit").click(function () {
+				$.ajax({
+					type: "PUT",
+					url: '/books',
+					data: {
+						author: $("#book_author").val(),
+						title: $("#book_title").val(),
+						published: $("#book_published").val()
+					},
+					dataType: "json"
+				})
+					.done(function (data) {
+						if (data['message'] === 'success')
+						{
+							console.log(data);
+							$('#add_modal').modal('hide')
+							addRow($("#tbodyid"), data['book'])
+						}
+					});
+			})

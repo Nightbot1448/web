@@ -1,0 +1,30 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title Главная
+		include head
+		script(src='/public/scripts/main_page.js', type='text/javascript')
+	body
+		.container
+			.row.mt-4
+				.col-md-2
+					a(href="/arts")
+						button.btn.btn-outline-info Картины
+				.col-md-3
+					button.btn.btn-outline-secondary#save_arts Сохранить состояние
+			.row.mt-4
+				.col-md-2
+					a(href="/participants")
+						button.btn.btn-outline-info Участники
+				.col-md-3
+					button.btn.btn-outline-secondary#save_participants Сохранить состояние
+			.row.mt-4
+				.col-md-2
+					a(href="/auction_settings")
+						button.btn.btn-outline-info Настройки аукциона
+		.modal.fade#success_saved(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+			.modal-dialog.modal-sm
+				.modal-dialog(role="document")
+					.modal-content
+						.modal-body Успешно сохранено

@@ -1,0 +1,14 @@
+.arts .row:nth-child(odd) {
+  background: #f7f7fa;
+}
+img {
+  padding: 10px 10px;
+  height: 150px;
+}
+.art_name {
+  font-size: 20px;
+}
+.col-sm-3 {
+  align-content: center!important;
+}
+/*# sourceMappingURL=list_of_arts.css.map */

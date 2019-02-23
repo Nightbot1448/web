@@ -1,0 +1,100 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title Список участников
+		include ../head
+		link(rel="stylesheet", href="public/style/participants/list_of_participants.css")
+	body
+		.modal.fade#add_modal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+			.modal-dialog(role="document")
+				.modal-content
+					.modal-header
+						h5.modal-title Добавление аукционера
+					.modal-body
+						.form-group
+							.form-head
+								label Имя:&nbsp;
+								input.form-control#participant_name(type="text")
+							.form-head
+								label Фамилия:&nbsp;
+								input.form-control#participant_surname(type="text")
+							.form-head
+								label Запас денежных средств:&nbsp;
+								input.form-control#participant_cash(type="number", min=1)
+					.modal-footer
+						button.btn.btn-success#add_submit(type="button") Добавить
+						button.btn.btn-secondary(type="button", data-dismiss="modal") Закрыть
+		.container
+			.row.mt-2
+				.col-sm-2
+					a(href='/')
+						button.btn.btn-outline-secondary На главную
+				.col-3.offset-sm-7
+					button.btn.btn-success(type="button" data-toggle="modal" data-target="#add_modal") Добавить аукционера
+			.row.mt-2
+				.col-sm-12
+					table.table.table-bordered.table-hover#main_table
+						thead
+							tr
+								th#name Имя
+								th#surname Фамилия
+								th#cash Запас денежных средств, млн $
+								th#link О аукционере
+						tbody#tbodyid
+							for participant in participants
+								tr
+									td.align-middle
+										= participant.name
+									td.align-middle
+										= participant.surname
+									td.align-middle
+										= participant.cash/1000000
+									td.link_btn
+										a(href='/participants/'+participant.id.toString())
+											button.btn.btn-outline-info Открыть
+		script.
+			function addRow(tbody, participant) {
+					let b_l = '/participants/' + participant['id']
+					tbody.append($('<tr>')
+							.append($('<td>').text(participant['name']))
+							.append($('<td>').text(participant['surname']))
+							.append($('<td>').text(participant['cash']/1000000))
+							.append($('<td>')
+									.append($('<a href=' + b_l + '>')
+											.append($('<button>')
+													.attr('class', 'btn btn-outline-info')
+													.text('Открыть')
+											)
+									)
+							)
+					);
+			}
+			$("#add_submit").click(function () {
+				let obj = {
+					name: $("#participant_name").val(),
+					surname: $("#participant_surname").val(),
+					cash: $("#participant_cash").val()
+				}
+				if(!obj.name.replace(/^\s+|\s+$/g, '').length)
+					alert('Поле "Имя" должно быть заполнено')
+				else if(!obj.surname.replace(/^\s+|\s+$/g, '').length)
+					alert('Поле "Фамилия" должно быть заполнено')
+				else if(!obj.cash.replace(/^\s+|\s+$/g, '').length || obj.cash <= 0 )
+					alert('Поле "Запас денежных средств" должно быть положительно заполнено')
+				else {
+					$.ajax({
+						type: "PUT",
+						url: '/participants',
+						data: obj,
+						dataType: "json"
+					})
+						.done(function (data) {
+								if (data['message'] === 'success') {
+										console.log(data);
+										$('#add_modal').modal('hide')
+										addRow($("#tbodyid"), data.participant)
+								}
+						});
+				}
+			})

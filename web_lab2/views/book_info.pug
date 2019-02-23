@@ -1,0 +1,87 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title Информация о книге
+		include head.pug
+		script.
+			book_json = {
+				id: #{info.id},
+				author: "#{info.author}",
+				title: "#{info.title}",
+				published: "#{info.published}",
+				in_library: #{info.in_library},
+				issued_to: "#{info.issued_to}",
+				return_date: "#{info.return_date}"
+			}
+		script(src='/public/page_scripts/book_info.js', type='text/javascript')
+		link(rel="stylesheet", href="/public/style/book_info.css")
+
+	body
+		.container
+			.row.mt1
+				.col-md-2.offset-md-10
+					a(href="/books")
+						button.btn.btn-info(style='margin-left: 20%') К списку книг
+			.row.mt1
+				.col-sm-12
+					-l = '/books'
+					form#form(action=l, method='post')
+						.form-group
+							label(for="book_author") Автор
+							input.form-control#book_author(type="text", name="author")
+						.form-group
+							label(for="book_title") Название
+							input.form-control#book_title(type="text", name="title")
+						.form-group
+							label(for="book_published") Дата публикации
+							input.form-control#book_published(type="date", name="published")
+						if info.in_library
+							label
+								b Книга в библиотеке
+						else
+							label
+								b Книга у читателя
+							.row
+								.col-sm-11.offset-sm-1
+									.form-group
+										.form-inline
+											label Полное имя:&nbsp;
+											input.form-control#book_issued_to(type="text")
+										.form-inline.mt1
+											label Дата возврата:&nbsp;
+											input.form-control#book_return_date(type="date")
+						.row
+							.col-sm-3
+								if info.in_library
+									button.btn.btn-primary#give_get_book(type="button" data-toggle="modal" data-target="#give_modal") Выдать
+								else
+									button.btn.btn-success#give_get_book(type="button") Принять
+							.col-sm-2.offset-sm-7
+								button.btn.btn-danger#delete(type="button") Удалить книгу
+						.row
+							.col-sm-12(style='margin-top: 3%;')
+								button.btn.btn-success#submit(type="submit") Сохранить
+					if info.in_library
+						.modal.fade#give_modal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+							.modal-dialog(role="document")
+								.modal-content
+									.modal-header
+										h5.modal-title#exampleModalLabel Выдача книги
+										button.close(type="button", data-dismiss="modal", aria-label="Close")
+											span(aria-hidden="true") &times;
+									.modal-body
+										-ml1 = 'http://localhost:3000/books/' + info.id
+										script.
+											console.log('#{ml1}')
+										#give_form(action="#{info.id}", method='PUT')
+											.form-group
+												.form-inline
+													label Полное имя:&nbsp;
+													input.form-control#give_get_book_name(type="text", name="issued_to_name")
+												.form-inline.mt1
+													label Дата возврата:&nbsp;
+													input.form-control#give_get_book_date(type="date", name="issued_to_date")
+												button.btn.btn-success.mt3#give_submit(type="button") Выдать
+									.modal-footer
+										button.btn.btn-secondary(type="button", data-dismiss="modal") Закрыть

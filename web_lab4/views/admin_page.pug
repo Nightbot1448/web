@@ -1,0 +1,30 @@
+include head
+link(rel='stylesheet', href='/stylesheets/style.css')
+script(src="/javascript/admin_page.js")
+script.
+    let user_id = "#{id}";
+body
+    iframe.ui-widget-content#onlineInfo(src="/online-info.html")
+    .w3-container.header
+        h1.w3-center Аукцион
+    .w3-container.w3-black
+        .w3-row
+            .w3-col.s12
+                h3.w3-center Уголок Администратора
+    .w3-container
+        .w3-row-padding.w3-margin-top
+            .w3-col.s12.m6.l8
+                .w3-container
+                    .w3-row
+                        .w3-col.s12.m6.l8
+                            h5.w3-center Картины
+                            #pictures
+                    .w3-row
+
+            .w3-col.s12.m6.l4
+                .w3-row
+                    .w3-col.m12.l5#auction_page
+                    .w3-col.m12.l7#sold_arts_page
+                .w3-row
+                h5.w3-center Возможные участники
+                .w3-opacity-off#bidders

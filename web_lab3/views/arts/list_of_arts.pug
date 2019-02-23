@@ -1,0 +1,144 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title Список картин
+		include ../head
+		link(rel="stylesheet", href="/public/style/arts/list_of_arts.css")
+	body
+		.container
+			.row.mt-2
+				.col-sm-2
+					a(href='/')
+						button.btn.btn-outline-secondary На главную
+				.col-sm-2.offset-sm-3
+					button.btn.btn-outline-primary#filter_involved Участвуют в аукционе
+				.col-sm-3
+					button.btn.btn-outline-primary.ml-4#filter_not_involved Не участвуют в аукционе
+				.col-sm-2
+					button.btn.btn-outline-secondary#filter_clear Очистить фильтры
+			.arts.mt-3
+				for art in arts
+					.row.mt-2
+						.col-sm-3.d-flex.justify-content-center
+							img(src='/public/images/' + art.src_file)
+						.col-sm-3.justify-content-center.align-self-center.art_name
+							= art.name
+						.col-sm-3.justify-content-center.align-self-center
+							= art.author
+						.col-sm-1.justify-content-center.align-self-center
+							= art.start_cost/1000000 + 'млн$'
+						.col-sm-1.justify-content-center.align-self-center
+							a(href='/arts/'+art.id.toString())
+								button.btn.btn-outline-info Инфо
+						.col-sm-1.justify-content-center.align-self-center
+							if art.is_participate
+								span &#x2714;
+							else
+								span &#x2716;
+		script.
+			function addRow(container, art) {
+				let art_l = '/arts/' + art['id']
+				console.log(art)
+				container.append($('<div class="row mt-2">')
+					.append($('<div>')
+						.attr("class","col-sm-3 d-flex justify-content-center")
+						.append($('<img>')
+							.attr('src','/public/images/' + art.src_file))
+					)
+					.append($('<div>')
+						.attr("class","col-sm-3 justify-content-center align-self-center art_name")
+						.text(art['name'])
+					)
+					.append($('<div>')
+						.attr("class","col-sm-3 justify-content-center align-self-center")
+						.text(art['author']))
+					.append($('<div>')
+						.attr("class","col-sm-1 justify-content-center align-self-center")
+						.text(art['start_cost']/1000000 + 'млн$')
+					)
+					.append($('<div>')
+						.attr("class","col-sm-1 justify-content-center align-self-center")
+						.append($('<a href=' + art_l + '>')
+							.append($('<button>')
+								.attr('class', 'btn btn-outline-info')
+								.text('Инфо')
+							)
+						)
+					)
+					.append($('<div>')
+							.attr("class", "col-sm-1 justify-content-center align-self-center")
+							.text(art['is_participate'] ? '\u2714' : '\u2716')
+					)
+				)
+			}
+			function fillTable(container, arts_list) {
+					container.children().remove();
+				for (let i in arts_list) {
+					addRow(container, arts_list[i])
+				}
+			}
+			$("#filter_involved").click(function () {
+				$.ajax({
+					type: "GET",
+					url: '/arts',
+					data: {
+						is_participate: true
+					},
+					dataType: "json"
+				})
+					.done(function (data) {
+						if (data['message'] === 'success') {
+							fillTable($(".arts"), data['arts'])
+						}
+					});
+			})
+			$("#filter_not_involved").click(function () {
+				$.ajax({
+					type: "GET",
+					url: '/arts',
+					data: {
+						is_participate: false
+					},
+					dataType: "json"
+				})
+					.done(function (data) {
+							if (data['message'] === 'success') {
+									fillTable($(".arts"), data['arts'])
+							}
+					});
+			});
+			$("#filter_clear").click(function () {
+					$.ajax({
+							type: "GET",
+							url: '/arts',
+							data: {
+									clear: true,
+							},
+							dataType: "json"
+					})
+							.done(function (data) {
+									if (data['message'] === 'success') {
+											fillTable($(".arts"), data['arts'])
+									}
+							});
+			})
+			$("#add_submit").click(function () {
+					$.ajax({
+							type: "PUT",
+							url: '/arts',
+							data: {
+									author: $("#art_author").val(),
+									title: $("#art_title").val(),
+									published: $("#art_published").val()
+							},
+							dataType: "json"
+					})
+							.done(function (data) {
+									if (data['message'] === 'success') {
+											console.log(data);
+											$('#add_modal').modal('hide')
+											addRow($("#tbodyid"), data['art'])
+									}
+							});
+			})

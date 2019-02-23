@@ -1,0 +1,6 @@
+node_modules/
+.idea/
+public/javascript/jquery.js
+public/javascript/jquery-ui.js
+public/stylesheets/jquery-ui.css
+public/stylesheets/w3.css

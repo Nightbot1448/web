@@ -1,0 +1,77 @@
+{
+  "data": [
+    {
+      "id": 100,
+      "name": "Джефф Безос",
+      "money": 112000000000,
+      "is_admin": false
+    },
+    {
+      "id": 101,
+      "name": "Билл Гейтс",
+      "money": 90000000000,
+      "is_admin": false
+    },
+    {
+      "id": 102,
+      "name": "Уоррен  Баффет",
+      "money": 84000000000,
+      "is_admin": false
+    },
+    {
+      "id": 103,
+      "name": "Бернар Арно",
+      "money": 72000000000,
+      "is_admin": false
+    },
+    {
+      "id": 104,
+      "name": "Марк Цукерберг",
+      "money": 71000000000,
+      "is_admin": false
+    },
+    {
+      "id": 105,
+      "name": "Амансио Ортега",
+      "money": 70000000000,
+      "is_admin": false
+    },
+    {
+      "id": 106,
+      "name": "Карлос Слим",
+      "money": 67100000000,
+      "is_admin": false
+    },
+    {
+      "id": 107,
+      "name": "Чарльз Кох",
+      "money": 60000000000,
+      "is_admin": false
+    },
+    {
+      "id": 108,
+      "name": "Девид Кох",
+      "money": 60000000000,
+      "is_admin": false
+    },
+    {
+      "id": 109,
+      "name": "Ларри Эллисон",
+      "money": 58500000000,
+      "is_admin": false
+    },
+    {
+      "id": 200,
+      "name": "Тестовый пользователь",
+      "money": 1000001,
+      "is_admin": false
+    },
+    {
+      "id": 777,
+      "name": "admin",
+      "money": 1000000,
+      "is_admin": true
+    }
+  ],
+  "ids": "101, 102"
+}

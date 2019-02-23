@@ -1,0 +1,48 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title Информация о картине
+		include ../head
+		script.
+			participant_object = {
+				id: #{participant.id},
+				name: "#{participant.name}",
+				surname: "#{participant.surname}",
+				cash: #{participant.cash}
+			}
+		script(src='/public/scripts/participant_info.js', type='text/javascript')
+		link(rel="stylesheet", href="/public/style/participants/participant_info.css")
+	body
+		.container
+			.row.mt-2
+				.col-sm-2
+					a(href='/participants')
+						button.btn(type='button') К списку участников
+			.row.mt-1
+				.col-sm-12
+					form#form(action="/participant", method='post')
+						.form-group
+							label(for="participant_name") Имя
+							input.form-control#participant_name(type="text", name="Имя")
+						.form-group
+							label(for="participant_surname") Фамилия
+							input.form-control#participant_surname(type="text", name="Фамилия")
+						.form-group
+							label(for="participant_cash") Запас денежных средств, млн $
+							input.form-control#participant_cash(name="Запас средств", type='number')
+						button.btn.btn-success#submit(type="button") Сохранить
+						button.btn.btn-danger#delete(type="button", data-toggle="modal" data-target="#sure_modal") Удалить из участия
+		.modal.fade#sure_modal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+			.modal-dialog(role="document")
+				.modal-content
+					.modal-header
+							h5.modal-title#exampleModalLabel Вы уверены, что хотите аукционера из участия в аукционе?
+					.modal-footer
+						button.btn.btn-danger#exclude(type="button") Исключить
+						button.btn.btn-secondary(type="button", data-dismiss="modal") Не исключать
+		.modal.fade#success_saved(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+			.modal-dialog.modal-sm
+				.modal-dialog(role="document")
+					.modal-content
+						.modal-body#modal_body

@@ -1,0 +1,21 @@
+.mt1{
+    margin-top: 1%;
+}
+
+.mt3{
+    margin-top: 3%;
+}
+
+#give_get_book_name{
+    width: 350px;
+    margin-left:14px;
+}
+
+#book_published{
+    width: 200px;
+}
+
+#book_issued_to{
+    width: 350px;
+    margin-left: 14px;
+}

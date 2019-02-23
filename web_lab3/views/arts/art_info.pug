@@ -1,0 +1,76 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title Информация о картине
+		include ../head
+		script.
+			art_object = {
+				id: #{art.id},
+				name: "#{art.name}",
+				author: "#{art.author}",
+				description: "#{art.description}",
+				is_participate: "#{art.is_participate}",
+				start_cost: #{art.start_cost},
+				min_cost_step: #{art.min_cost_step},
+				max_cost_step: #{art.max_cost_step}
+			}
+		script(src='/public/scripts/art_info.js', type='text/javascript')
+		link(rel="stylesheet", href="/public/style/arts/art_info.css")
+	body
+
+		.container
+			.row.mt-1
+				.col-sm-6
+					.row.mt-2
+						.col-sm-2
+							a(href='/arts')
+								button.btn.btn-sm(type='button') К списку картин
+					.row
+						.col-sm-12
+					img#img.mt-2(src='/public/images/' + art.src_file)
+				.col-sm-6.mt-2
+					-l = '/arts'
+					form#form(action=l, method='post')
+						.form-group
+							label(for="art_name") Название картины
+							input.form-control#art_name(type="text", name="Название картины")
+						.form-group
+							label(for="art_author") Автор(Авторы)
+							input.form-control#art_author(type="text", name="Автор(Авторы)")
+						.form-group
+							label(for="art_description") Описание
+							textarea.form-control#art_description(name="Описание")
+						.form-group
+							label(for="art_start_cost") Начальная стоимость
+							input.form-control#art_start_cost(type="number", name="Начальная стоимость", min = '1')
+						.form-group
+							label(for="art_min_cost_step") Минимальный шаг
+							input.form-control#art_min_cost_step(type="number", name="Минимальный шаг", min = '1')
+						.form-group
+							label(for="art_min_cost_step") Максимальный шаг
+							input.form-control#art_max_cost_step(type="number", name="Максимальный шаг", min = '1')
+						button.btn.btn-success.mb-2#submit(type="button") Сохранить
+						if art.is_participate
+							button.btn.btn-danger#is_participate(type="button", data-toggle="modal" data-target="#sure_modal") Удалить из участия
+						else
+							button.btn.btn-primary#is_participate(type="button", data-toggle="modal" data-target="#sure_modal") Выставить картину
+			.modal.fade#sure_modal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+				.modal-dialog(role="document")
+					.modal-content
+						.modal-header
+							if art.is_participate
+								h5.modal-title#exampleModalLabel Вы уверены, что хотите исключить картину из участия в аукционе?
+							else
+								h5.modal-title#exampleModalLabel Вы уверены, что хотите выставить картину на аукцион?
+						.modal-footer
+							if art.is_participate
+								button.btn.btn-danger#exclude(type="button") Исключить
+							else
+								button.btn.btn-primary#expose(type="button") Выставить
+							button.btn.btn-secondary(type="button", data-dismiss="modal") Не изменять
+			.modal.fade#success_saved(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+				.modal-dialog.modal-sm
+					.modal-dialog(role="document")
+						.modal-content
+							.modal-body#modal_body

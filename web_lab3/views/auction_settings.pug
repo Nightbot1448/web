@@ -1,0 +1,45 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title Главная
+		include head
+		script.
+			auction_settings = {
+				date: "#{settings.auction_date}",
+				time: "#{settings.auction_time}",
+				timeout: #{settings.timeout_sale},
+				end_time: #{settings.auction_end_time},
+				study_pause: #{settings.info_study_pause}
+			}
+		script(src='/public/scripts/auction_settings.js', type='text/javascript')
+	body
+		.container
+			.row.mt-2
+				.col-sm-2
+					a(href='/')
+						button.btn.btn-outline-secondary На главную
+			.row.mt-2
+				.col-sm-12
+					form#form(action = '/', method="POST")
+						.form-group
+							label(for="auction_date") Дата проведения
+							input.form-control#auction_date(type="date", name="auction_date", required)
+						.form-group
+							label(for="auction_time") Время
+							input.form-control#auction_time(type="time", name="auction_time", required)
+						.form-group
+							label(for="timeout_sale") Таймаут продажи
+							input.form-control#timeout_sale(type='number', name="timeout_sale", min = '1', required, positive_num)
+						.form-group
+							label(for="auction_end_time") Интервала времени отсчёта до окончания торга по картине
+							input.form-control#auction_end_time(type="number", name="auction_end_time", min = '1', required, positive_num)
+						.form-group
+							label(for="info_study_pause") Пауза на изучение информации по картине для начала торга по ней
+							input.form-control#info_study_pause(type="number", name="info_study_pause", min = '1', required, positive_num)
+						button.btn.btn-success.mb-2#submit(type="submit") Сохранить
+		.modal.fade#success_saved(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+			.modal-dialog.modal-sm
+				.modal-dialog(role="document")
+					.modal-content
+						.modal-body Успешно сохранено

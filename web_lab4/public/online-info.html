@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="javascript/jquery.js"></script>
+    <script>
+        function init(show) {
+            // debugger
+            addEventListener('message', (e) => {
+                console.log(e.data)
+                var data = e.data;
+                $(function(){
+                    $('html, body').animate({scrollTop: $(document).height()-$(window).height()}, 0);
+                });
+                switch (data.type) {
+                    case('info'):
+                        show.innerHTML += `<div style="color: #4CAF50"><hr >` +
+                            `Информация:  ${data.message}<br></div>`;
+                        break;
+                    case('timeTillEnd'):
+                        timeTillEnd.innerHTML = data.message;
+                        break;
+                    case('timeTillNext'):
+
+                        timeTillNext.innerHTML = data.message;
+                        break;
+                    case('sold'):
+                        show.innerHTML += `<div style="color: #d2be0e"><hr >` +
+                            `Картина продана! Ожидание следующей картины<br></div>`;
+                        break;
+                    case('update'):
+                        show.innerHTML += `<div style="color: darkblue"><hr >` +
+                            `Цена повыщена на ${JSON.parse(data.message).added}! Текущая цена: ${JSON.parse(data.message).curPrice}<br></div>`;
+                        break;
+                    case('pause'):
+                        show.innerHTML += `<div style="color: darkred"><hr >` +
+                            `Пауза!<br></div>`;
+                    break;
+                    case('start'):
+                        show.innerHTML += `<div style="color: darkgreen"><hr >` +
+                            `Старт!<br></div>`;
+                    break;
+                }
+                // show.innerHTML += `<hr>` +
+                //     `Сообщение:  ${e.data}<br>`;
+            });
+        }
+    </script>
+</head>
+<body style="background: white;" onload="init(show)">
+<div>Time:
+    <div id="timeTillEnd"></div>
+</div>
+<div>Next:
+    <div id="timeTillNext"></div>
+</div>
+<div id="show"></div>
+
+
+</body>
+</html>

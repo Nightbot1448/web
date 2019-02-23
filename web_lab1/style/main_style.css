@@ -1,0 +1,39 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    background: url("../images/material-design-desktop-wallpaper.png") no-repeat center;
+    background-size: cover;
+}
+
+.bb {
+    background-color: black;
+}
+
+#score, #nextFigureField{
+    border-radius: 10px;
+}
+
+#margin{
+    margin-top: 2%;
+}
+
+.score_label{
+    color: #ea9100;
+    font-size: 200%; /* Размер шрифта в процентах */
+    font-family: serif; /* Шрифт с засечками */
+    position: relative; /* Относительное позиционирование */
+    top: 5px;
+}
+
+.btnStyle{
+    color: #000000;
+    background-color: #ea9100;
+    border: none;
+    padding: 10px 20px 10px 20px;
+}
+
+.btnStyle:hover{
+    color: #000000;
+    background-color: #d68400;
+    border: none;
+}

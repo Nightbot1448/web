@@ -1,0 +1,134 @@
+{
+  "frames": {
+    "Player": {
+      "frame": {
+        "x": 41,
+        "y": 0,
+        "w": 19,
+        "h": 25
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 19,
+        "h": 25
+      },
+      "sourceSize": {
+        "w": 19,
+        "h": 25
+      }
+    },
+    "Player_Left": {
+      "frame": {
+        "x": 41,
+        "y": 26,
+        "w": 19,
+        "h": 25
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 19,
+        "h": 25
+      },
+      "sourceSize": {
+        "w": 19,
+        "h": 25
+      }
+    },
+    "Enemy_Right": {
+      "frame": {
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 25
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 25
+      },
+      "sourceSize": {
+        "w": 20,
+        "h": 25
+      }
+    },
+    "Enemy": {
+      "frame": {
+        "x": 20,
+        "y": 26,
+        "w": 20,
+        "h": 25
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 25
+      },
+      "sourceSize": {
+        "w": 20,
+        "h": 25
+      }
+    },
+    "jump_l": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 19,
+        "h": 25
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 19,
+        "h": 25
+      },
+      "sourceSize": {
+        "w": 19,
+        "h": 25
+      }
+    },
+    "jump_r": {
+      "frame": {
+        "x": 0,
+        "y": 26,
+        "w": 19,
+        "h": 25
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 19,
+        "h": 25
+      },
+      "sourceSize": {
+        "w": 19,
+        "h": 25
+      }
+    }
+  },
+  "meta": {
+    "app": "https://www.leshylabs.com/apps/sstool/",
+    "version": "Leshy SpriteSheet Tool v0.8.4",
+    "image": "spritesheet.png",
+    "size": {
+      "w": 60,
+      "h": 51
+    },
+    "scale": 1
+  }
+}

@@ -1,0 +1,44 @@
+#main_table{
+    margin-top: 1%;
+}
+th{
+    text-align: center;
+}
+td{
+    text-align: center;
+}
+.mt1{
+    margin-top: 1%;
+}
+.mt3{
+    margin-top: 3%;
+}
+.link_btn{
+    width: 10%;
+}
+#text_filter{
+    font-style: normal;
+    font-size: 20px;
+}
+td{
+    vertical-align:middle!important
+}
+#head_author{
+    width: 16%;
+}
+#head_author{
+    width: 15%;
+}
+#head_published{
+    width: 17%;
+}
+#head_in_library{
+    width: 15%;
+}
+#head_return{
+    width: 15%;
+}
+#book_link
+{
+    width: 15%;
+}

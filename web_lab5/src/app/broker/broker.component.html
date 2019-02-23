@@ -1,0 +1,52 @@
+<div class="w3-modal disp-bl" *ngIf="ModalVis">
+  <div class="w3-modal-content width800">
+    <header class="w3-container w3-cyan">
+      <span class="w3-button w3-display-topright" (click)="closeaddform()">&#x2716;</span>
+      <h2 class="w3-center"> Добавление брокера</h2>
+    </header>
+    <div class="w3-container">
+      <div class="w3-section">
+        <label bold>Имя</label>
+        <input class="w3-input w3-border w3-margin-bottom" [(ngModel)]="name">
+        <label bold>Баланс</label>
+        <input class="w3-input w3-border w3-margin-bottom" [(ngModel)]="money" type="number">
+        <button class="w3-button w3-block w3-section w3-padding w3-cyan" (click)="add(name,money)">Добавить</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!ModalVis" class="w3-display-topmiddle mt w3-container" style="width: 60%">
+  <div class="w3-row">
+    <div class="w3-col s12">
+      <button class="w3-block w3-cyan w3-large w3-button w3-round-xxlarge" (click)="addform()">
+        Добавить брокера
+      </button>
+    </div>
+  </div>
+  <div class="w3-row w3-margin-top">
+    <div class="w3-container">
+      <div class="w3-row w3-margin-bottom w3-teal row-height">
+        <div class="w3-col s1 w3-center w3-rightbar col-height mtpx w3-border-cyan">Индекс</div>
+        <div class="w3-col s4 w3-center w3-rightbar col-height mtpx w3-border-cyan">Имя</div>
+        <div class="w3-col s3 w3-center w3-rightbar col-height mtpx w3-border-cyan">Баланс</div>
+        <div class="w3-col s3 w3-center w3-rightbar col-height mtpx w3-border-cyan">Изменить баланс</div>
+        <div class="w3-col s1 w3-center col-height mtpx">Удалить</div>
+      </div>
+      <div class="w3-row w3-hover-blue row-height" *ngFor="let todo of mydata ; index as ind">
+        <div class="w3-col s1 w3-center mtpx" > {{ind+1}} </div>
+        <div class="w3-col s4 w3-center mtpx">{{todo.name}}</div>
+        <div class="w3-col s3 w3-center mt_inp">
+          <input *ngIf="MoneyFlag == ind" class="w3-center w3-border" [(ngModel)]="newmoney"
+                 placeholder="{{todo.money}}" (change)="editmoney(ind,newmoney);newmoney='';">
+          <input *ngIf="MoneyFlag !== ind" class="w3-center w3-border" placeholder="{{todo.money}}" disabled="true">
+        </div>
+        <div class="w3-col s3 w3-center mt_radio">
+          <input class="w3-radio" type="radio" name="edit" (change)="editmoneyflag(ind)"/>
+        </div>
+        <div class="w3-col s1 w3-center mt_radio">
+          <button (click)="delAkc(ind)" class="w3-button">&#x2716;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

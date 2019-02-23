@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="style/bootstrap.css" rel="stylesheet">
+    <link href="style/index_style.css" rel="stylesheet">
+    <script type="text/javascript" src="scripts/login.js"></script>
+    <title>Tetris</title>
+</head>
+<body>
+<div class="container">
+    <div class="row" style="margin-top: 2%">
+        <div class="col-sm-offset-1 col-sm-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class = "name_input"><p>Введите имя</p></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="text" placeholder="Имя пользователя" id="username" size="20">
+                </div>
+            </div>
+            <button class="btn btn-primary" id="goButton">
+                <span style="font-weight: bold" onclick="saveRedirect()">
+                    Go!
+                </span>
+            </button>
+        </div>
+        <div class="col-sm-6">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <td>Username</td>
+                        <td>Score</td>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    check();
+</script>
+</body>
+</html>

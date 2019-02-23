@@ -1,0 +1,35 @@
+#currentPic{
+    margin-left: 5%;
+}
+
+.curPic{
+    margin: 0 auto;
+    width: 50%;
+    padding: 10px;
+}
+
+#curr_art{
+    max-width: 400px;
+    max-height: 700px
+}
+
+#mem_id {
+    width: 100%;
+}
+
+
+#bidders .ui-accordion-header {
+    background-color: black;
+}
+
+.my_img{
+    max-height: 250px;
+    width: auto;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+#onlineInfo{
+    width: 100%;
+    height: 450px;
+}

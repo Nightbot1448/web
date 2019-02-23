@@ -1,0 +1,53 @@
+include head
+link(rel='stylesheet', href='/stylesheets/style.css')
+script(src="/javascript/auction_page.js")
+script.
+    let user_id = #{id};
+    let user_money = #{money};
+body
+    div.w3-container.header
+        h1.w3-center Аукцион
+    .w3-container.w3-black
+        h3.w3-center.container#hello-tab
+    .w3-container.w3-margin-bottom
+        .w3-row
+            .w3-col.m12.l6#member
+                .w3.container
+                    .w3-row
+                        .w3-container
+                            .w3-row.w3-margin-top
+                                .w3-col.s5
+                                    span Прошедшее время:
+                                .w3-col.s5
+                                    #timer
+                            .w3-row.w3-margin-top
+                                .w3-col.s5
+                                    span Текущая стоимость(млн.$):
+                                .w3-col.s5
+                                    #curr_cost
+                            .w3-row.w3-margin-top
+                                .w3-col.s12
+                                    #currentPic
+                        .w3-container.w3-margin-bottom
+                            .w3-row
+                                .w3-col.s12.l6
+                                    button.w3-button.w3-green.w3-margin-top#widgetBtn Предложить новую цену
+                                .w3-col.s12.l6
+                                    button.w3-button.w3-green.w3-margin-top#requestBtn Подать заявку
+                        #widget(title="Увеличить цену")
+                            .w3-container
+                                .w3-row.w3-margin-top
+                                    .w3-col.s7 Поднять цену на &#x00A0;
+                                    .w3-col.s5#value
+                                .w3-row.w3-margin-top
+                                    .w3-col.s12#slider
+                                    .ui-slider-handle
+                                .w3-row.w3-margin-top
+                                    button.w3-button.w3-green#addBtn Добавить
+            .w3-col.m12.l6
+                .w3-container
+                    .w3-row.w3-margin-top
+                        iframe.ui-widget-content#onlineInfo(src="/online-info.html")
+                    .w3-row.w3-margin-top
+                        .w3-col.m12.l6#sold_arts_page
+                        .w3-col.m12.l6#admin_page

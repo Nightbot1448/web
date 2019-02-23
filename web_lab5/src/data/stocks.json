@@ -1,0 +1,1 @@
+{"0":{"name":"first","availCount":1000,"minPrice":300,"maxPrice":10,"distr":"равномерный"},"1":{"name":"second","availCount":1500,"minPrice":500,"maxPrice":60,"distr":"биномиальный"},"2":{"name":"third","availCount":1200,"minPrice":250,"maxPrice":80,"distr":"нормальный"}}
