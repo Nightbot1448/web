@@ -28,7 +28,7 @@
     "pug": "2.0.0-beta11",
     "rollbar": "^2.5.0",
     "should": "^13.2.3",
-    "socket.io": "^2.1.1",
+    "socket.io": "^2.4.0",
     "w3-css": "^4.1.0",
     "webpack": "^4.23.1",
     "webpack-jquery-ui": "^2.0.1",
